@@ -36,5 +36,6 @@ COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 6379
-COPY redis.conf /usr/local/etc/redis/redis.conf
+RUN cp -f /data/redis.conf /usr/local/etc/redis/redis.conf
+#COPY redis.conf /usr/local/etc/redis/redis.conf
 CMD ["redis-server", "/usr/local/etc/redis/redis.conf"]
