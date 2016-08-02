@@ -32,8 +32,8 @@ RUN mkdir /data && chown redis:redis /data
 VOLUME ["/data"]
 WORKDIR /data
 
-COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+COPY docker-entrypoint.sh /usr/local/bin/
+ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 6379
 COPY redis.conf /usr/local/etc/redis/redis.conf
