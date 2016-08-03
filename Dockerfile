@@ -9,6 +9,7 @@ RUN apk add --no-cache 'su-exec>=0.2'
 ENV REDIS_VERSION 3.2.3
 ENV REDIS_DOWNLOAD_URL http://download.redis.io/releases/redis-3.2.3.tar.gz
 ENV REDIS_DOWNLOAD_SHA1 92d6d93ef2efc91e595c8bf578bf72baff397507
+ENV CONF_PATH_REDIS /data
 
 # for redis-sentinel see: http://redis.io/topics/sentinel
 RUN set -x \
@@ -36,6 +37,5 @@ COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 6379
-RUN cp -f /data/redis.conf /usr/local/etc/redis/redis.conf
-#COPY redis.conf /usr/local/etc/redis/redis.conf
+COPY $CONF_PATH_REDIS/redis.conf /usr/local/etc/redis/redis.conf
 CMD ["redis-server", "/usr/local/etc/redis/redis.conf"]
